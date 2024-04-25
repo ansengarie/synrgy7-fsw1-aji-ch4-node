@@ -1,9 +1,14 @@
 // segitiga.js
+function hitungLuasSegitiga(alas, tinggi) {
+  return 0.5 * alas * tinggi;
+}
+
+function hitungVolumeSegitiga(alas, tinggi, sisi) {
+  return (1 / 3) * hitungLuasSegitiga(alas, tinggi) * sisi;
+}
+
+// Ekspor fungsi-fungsi yang dibutuhkan
 module.exports = {
-  luas: function (alas, tinggi) {
-    return 0.5 * alas * tinggi;
-  },
-  volume: function (alas, tinggi, sisi) {
-    return (1 / 3) * this.luas(alas, tinggi) * sisi;
-  },
+  hitungLuasSegitiga,
+  hitungVolumeSegitiga,
 };
