@@ -65,26 +65,51 @@ const people = [
 ];
 
 // Fungsi async untuk menulis data ke dalam file
-async function writeDataToFile(data) {
-  try {
-    await fs.promises.writeFile("people.txt", JSON.stringify(data, null, 2));
-    console.log("Data berhasil ditulis ke dalam file.");
-  } catch (error) {
-    console.error("Terjadi kesalahan saat menulis ke dalam file:", error);
+function writeDataToFile(data) {
+  fs.writeFile("people.txt", JSON.stringify(data), (error) => {
+    if (error) {
+      console.error("Terjadi kesalahan saat menulis ke dalam file:", error);
+    } else {
+      console.log("Data berhasil ditulis ke dalam file.");
+    }
+  });
+}
+
+// Fungsi untuk membaca data dari file
+function readDataFromFile() {
+  fs.readFile("people.txt", "utf8", (error, data) => {
+    if (error) {
+      console.error("Terjadi kesalahan saat membaca dari file:", error);
+    } else {
+      console.log("Data yang dibaca dari file:");
+      console.log(data);
+    }
+  });
+}
+
+module.exports = { readDataFromFile };
+
+function getDataName() {
+  const names = people.map((person) => person.name);
+  console.log("Nama-nama orang:");
+  console.log(names);
+}
+
+// Fungsi untuk mendapatkan detail orang berdasarkan ID
+function getDetail(id) {
+  const person = people.find((person) => person.id === id);
+  if (person) {
+    console.log("Detail orang dengan ID", id, ":");
+    console.log(person);
+  } else {
+    console.log("Orang dengan ID", id, "tidak ditemukan.");
   }
 }
 
-// Fungsi async untuk membaca data dari file
-async function readDataFromFile() {
-  try {
-    const data = await fs.promises.readFile("people.txt", "utf8");
-    console.log("Data yang dibaca dari file:");
-    console.log(data);
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Terjadi kesalahan saat membaca dari file:", error);
-    return null;
-  }
-}
-
-module.exports = { people, writeDataToFile, readDataFromFile };
+module.exports = {
+  people,
+  writeDataToFile,
+  readDataFromFile,
+  getDataName,
+  getDetail,
+};

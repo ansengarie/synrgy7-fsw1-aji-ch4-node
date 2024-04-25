@@ -7,6 +7,8 @@ const {
   people,
   writeDataToFile,
   readDataFromFile,
+  getDataName,
+  getDetail,
 } = require("./script/people");
 
 // Menggunakan modul segitiga
@@ -35,6 +37,7 @@ fs.writeFileSync("result.txt", `Volume Balok: ${volumeBalok}`);
 
 // Panggil fungsi untuk menulis data ke dalam file
 writeDataToFile(people);
-
-// Panggil fungsi untuk membaca data dari file
 readDataFromFile();
+
+getDataName();
+getDetail(1);
